@@ -23,6 +23,8 @@ namespace DataApp1
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        List <String> listBoxList = new List <String> ();
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -31,13 +33,27 @@ namespace DataApp1
 
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "Clicked";
+            // myButton.Content = "Clicked";
+            // Populate the current item in the textbox.
+            if (ListOfDataTables.SelectedIndex >= 0) { 
+                ListItemTextbox.Text = ListOfDataTables.SelectedValue.ToString();
+            }
+            listBoxList[0] = "something else";
+
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            int selectedItem = ListOfDataTables.SelectedIndex;
+            listBoxList[selectedItem] = ListOfDataTables.SelectedValue.ToString();
+
         }
 
         private void populate_listbox(int numberOfRows) {
             for (int i = 0; i < numberOfRows; i++)
             {
-                ListOfDataTables.Items.Add("Something_"+i.ToString());
+                listBoxList.Add("Something_with_bind" + i.ToString());               // This adds the items to the list. The Listbox in the UI is bound to the list.
+                // ListOfDataTables.Items.Add("Something_"+i.ToString());   // This puts the item directly into the listbox in the UI
             }
         
         }
